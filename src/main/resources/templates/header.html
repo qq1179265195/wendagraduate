@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<head th:fragment="header">
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!--<script async="" type="text/javascript" src="/scripts/ga.js"></script>-->
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+  <script src="/js/WendaJavascripts.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/css/wendacss.css">
+  <style>
+    .zm-item-answer-author-info a.collapse {margin-top: 0}
+  </style>
+
+</head>
+<div th:fragment="navi" role="navigation" class="zu-top " style="padding-bottom: 2%">
+  <div class="zg-wrap modal-shifting clearfix " id="zh-top-inner">
+    <a href="/" class="zu-top-link-logo" id="zh-top-link-logo" data-za-c="view_home" data-za-a="visit_home" data-za-l="top_navigation_zhihu_logo">wenda</a>
+    <div class="top-nav-profile">
+      <th:block th:if="${user}==null">
+        <ul class="topnav-noauth clearfix">
+          <li>
+            <a href="/login">注册/登陆</a>
+          </li>
+        </ul>
+      </th:block>
+      <th:block th:if="${user}!=null">
+        <a  onclick="showdown()" class="zu-top-nav-userinfo " id=":0" role="button" aria-haspopup="true" aria-activedescendant="">
+          <span class="name">[[${user.name}]]</span>
+          <img class="Avatar" th:src="${user.headUrl}" th:alt="${user.name}">
+          <span id="zh-top-nav-new-pm" class="zg-noti-number zu-top-nav-pm-count" style="visibility:hidden" data-count="0">
+                    </span>
+        </a>
+        <ul class="top-nav-dropdown" id="top-nav-profile-dropdown" aria-labelledby=":0">
+          <li>
+            <a th:href="'/user/'+${user.id}" tabindex="-1" id=":1">
+              <i class="zg-icon zg-icon-dd-home"></i>我的主页
+            </a>
+          </li>
+          <li>
+            <a href="/msg/list" tabindex="-1" id=":2">
+              <i class="zg-icon zg-icon-dd-pm"></i>私信
+              <span id="zh-top-nav-pm-count" class="zu-top-nav-pm-count zg-noti-number" style="visibility:hidden" data-count="0">
+                    </span>
+            </a>
+          </li>
+          <li>
+            <a href="/logout" tabindex="-1" id=":4">
+              <i class="zg-icon zg-icon-dd-logout"></i>退出
+            </a>
+          </li>
+        </ul>
+      </th:block>
+    </div>
+    <div>
+      <button class="zu-top-add-question" id="zu-top-add-question"><a href="/Publish" style="color: white">提问</a></button>
+    </div>
+    <div role="search" id="zh-top-search" class="zu-top-search">
+      <form method="GET" action="/" id="zh-top-search-form" class="zu-top-search-form">
+        <input type="hidden" name="type" value="content">
+        <label for="q" class="hide-text">搜索</label><input type="text" class="zu-top-search-input" id="q" name="q" autocomplete="off" value="" placeholder="搜索你感兴趣的内容..." role="combobox" aria-autocomplete="list">
+        <button type="submit" class="zu-top-search-button"><span class="hide-text">搜索</span><span class="sprite-global-icon-magnifier-dark"></span></button>
+      </form>
+    </div>
+    <div id="zg-top-nav" class="zu-top-nav">
+      <ul class="zu-top-nav-ul zg-clear">
+        <li class="zu-top-nav-li current" id="zh-top-nav-home">
+          <a class="zu-top-nav-link" href="/" id="zh-top-link-home" data-za-c="view_home" data-za-a="visit_home" data-za-l="top_navigation_home" style="background: #4dabff">首页</a>
+        </li>
+        <li class="zu-top-nav-li " id="zh-top-nav-explore">
+          <a class="zu-top-nav-link" href="">发现</a>
+        </li>
+        <li class="top-nav-noti zu-top-nav-li ">
+          <a class="zu-top-nav-link" href="javascript:;" id="zh-top-nav-count-wrap" role="button"><span class="mobi-arrow"></span>消息<span id="zh-top-nav-count" class="zu-top-nav-count zg-noti-number" style="display: none;">0</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</html>

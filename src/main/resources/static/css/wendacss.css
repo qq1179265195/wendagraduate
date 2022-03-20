@@ -1,0 +1,35 @@
+.wa-log{
+    width: 90px;
+    height: 40px;
+    margin-left: auto;
+    float: left;
+    position: relative;
+}
+.wa-search{
+    float: left;
+    position: relative;
+}
+.wa-top-menu-wrap {
+    position: relative;
+    z-index: 1001;
+    width: 100%;
+    min-height: 50px;
+
+    background-color: #499ef3;
+}
+.main {
+    background-color: white;
+    margin-left: 10%;
+    margin-top: 50px;
+    margin-right: 10%;
+}
+.btn-publish{
+    float: right;
+    margin-bottom:15px ;
+}
+.main-one{
+    background-color: white;
+    margin-left: 6%;
+    margin-top: 50px;
+    margin-right: 6%;
+}

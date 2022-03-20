@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+   <title>知识问答</title>
+    <head th:insert="~{header::header}"></head>
+</head>
+<body class="zhi " >
+<div th:insert="~{header::navi}"></div>
+
+<div class="container-fluid main">
+    <div class="row">
+
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="border-right:1px solid rgb(230,230,230)">
+            <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 发现</h3>
+            <ul class="nav nav-tabs">
+                <li role="presentation" th:class="${sort == 'new' || sort == '' ? 'active':''}">
+                    <a th:href="@{/(sort='new')}">最新</a>
+                </li>
+                <li role="presentation" th:class="${sort == 'hot30' ? 'active':''}">
+                    <a th:href="@{/(sort='hot30')}">30天最热</a>
+                </li>
+                <li role="presentation" th:class="${sort == 'hot7' ? 'active':''}">
+                    <a th:href="@{/(sort='hot7')}">7天最热</a>
+                </li>
+                <li role="presentation" th:class="${sort == 'hot' ? 'active':''}">
+                    <a th:href="@{/(sort='hot')}">最热</a>
+                </li>
+                <li role="presentation" th:class="${sort == 'no' ? 'active':''}">
+                    <a th:href="@{/(sort='no')}" class="red">消灭零回复</a>
+                </li>
+            </ul>
+            <!--<th:block th:each="vo,stat:${vos}">-->
+            <div class="feed-item folding feed-item-hook feed-item-2
+                        " feed-item-a="" data-type="a" id="feed-2" data-za-module="FeedItem" data-za-index="" th:each="vo,stat:${result.list}">
+                <meta itemprop="ZReactor" data-id="389034" data-meta="{&quot;source_type&quot;: &quot;promotion_answer&quot;, &quot;voteups&quot;: 4168, &quot;comments&quot;: 69, &quot;source&quot;: []}">
+                <div class="feed-item-inner">
+                    <div class="avatar">
+                        <a th:title="${vo.name}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="">
+                            <img th:src="${vo.headUrl}" class="zm-item-img-avatar"></a>
+                    </div>
+                    <div class="feed-main">
+                        <div class="feed-content" data-za-module="AnswerItem">
+                            <meta itemprop="answer-id" content="389034">
+                            <meta itemprop="answer-url-token" content="13174385">
+                            <h2 class="feed-title">
+                                <a class="question_link" target="_blank" th:href="'/question/'+${vo.id}" style="font-size: x-large">[[${vo.title}]]</a></h2>
+                            <div class="feed-question-detail-item">
+                                <div class="question-description-plain zm-editable-content"></div>
+                            </div>
+                            <div class="expandable entry-body">
+                                <div class="zm-item-vote">
+                                    <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">4168</a></div>
+                                <div class="zm-item-answer-author-info">
+                                    <a class="author-link" data-tip="p$b$amuro1230" target="_blank" th:href="'/user/'+${vo.userId}">[[${vo.name}]]</a>
+                                    ,[[${#dates.format(vo.createdDate,'yyyy-MM-dd')}]]</div>
+                                <div class="zm-item-vote-info" data-votecount="4168" data-za-module="VoteInfo">
+                                                <span class="voters text">
+                                                    <a href="#" class="more text">
+                                                        <span class="js-voteCount">4168</span>&nbsp;人赞同</a></span>
+                                </div>
+                                <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="123114" data-action="/answer/content" data-author-name="李淼" data-entry-url="/question/19857995/answer/13174385">
+                                    <div class="zh-summary summary clearfix">[[${vo.content}]]</div>
+                                </div>
+                            </div>
+                            <div class="feed-meta">
+                                <div class="zm-item-meta answer-actions clearfix js-contentActions">
+                                    <div class="zm-meta-panel">
+                                        <a data-follow="q:link" class="follow-link zg-follow meta-item" href="javascript:;" id="sfb-123114">
+                                            <i class="z-icon-follow"></i>关注问题</a>
+                                        <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
+                                            <i class="z-icon-comment"></i>[[${vo.commentCount}]] 条评论</a>
+                                        <a href="#" name="addViewcount" class="meta-item toggle-comment js-toggleCommentBox">
+                                            <i class="z-icon-report-o"></i>[[${vo.commentCount}]] 次浏览</a>
+                                        <button class="meta-item item-collapse js-collapse">
+                                            <i class="z-icon-fold"></i>收起</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--分页-->
+            <nav aria-label="Page navigation" style="float: right">
+                <ul class="pagination">
+                    <li th:unless="${result.isIsFirstPage()}">
+                        <a th:href="@{'/index?page='+${result.prePage}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                   <li th:each="pageNo:${pagelist}" th:class="${result.pageNum == pageNo}? 'active' : ''">
+                        <a th:href="@{'/index?page='+${pageNo}}" th:text="${pageNo}"></a>
+                    </li>
+
+                    <li th:unless="${result.isIsLastPage()}">
+                        <a th:href="@{'/index?page='+${result.nextPage}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h2> 热门话题</h2>
+            </br>
+
+
+            <hr/>
+            <h3>问题发起指南</h3>
+            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字 <br>
+            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料<br>
+            • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字<br>
+        </div>
+
+    </div>
+</div>
+
+<th:block th:insert="~{footer::foot}"></th:block>
+</body>
+
+</html>
